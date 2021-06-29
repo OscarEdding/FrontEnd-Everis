@@ -1,0 +1,93 @@
+<div class="col-4 offset-4 p-4 animate__animated animate__fadeInDown">
+    <h2>Formulario De Pago</h2>
+    <br>
+    <h6><b>Total a Pagar:</b> {{ total | currency:'CLP ' }}</h6>
+
+    <form [formGroup]="formPago" (ngSubmit)="send()" class="pt-4 pb-4" errorTailor>
+
+        <!-- ********** INPUT TIPO DE TARJETA ************** -->
+        <div class="mb-3">
+            <label for="card" class="form-label">Tipo De Tarjeta</label>
+            <select class="form-control shadow" formControlName="card" name="card" id="card">
+                <option value="debito">Tarjeta de Débito</option>
+                <option value="credito">Tarjeta de Crédito</option>
+            </select>
+        </div>
+
+        <!-- ********** INPUT Nombre ************** -->
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre Completo</label>
+            <input type="text" class="form-control shadow" id="name" formControlName="name">
+        </div>
+
+        <!-- ********** INPUT CUENTA ************** -->
+        <div class="mb-3">
+            <label for="account" class="form-label">Número de Cuenta</label>
+            <input type="text" class="form-control shadow" id="account" formControlName="account">
+        </div>
+
+        <!-- ********** INPUT CVV ************** -->
+        <div class="mb-3">
+            <label for="password" class="form-label">CVV</label>
+            <input type="password" class="form-control shadow" id="password" formControlName="password"
+                [controlErrorsTpl]="messagePasswordError">
+        </div>
+
+        <!-- ********** INPUT EXPIRACIÓN ************** -->
+        <div class="mb-3">
+            <label for="number" class="form-label">Fecha Expiración</label>
+            <input type="text" class="form-control shadow" id="number" formControlName="number">
+        </div>
+
+        <!-- ********** INPUT SELECT ************** -->
+        <div class="mb-3">
+            <label for="select" class="form-label">Tipo Cuenta</label>
+            <select class="form-control shadow" formControlName="type" name="select" id="select">
+                <option value="corriente">Cuenta Corriente</option>
+                <option value="visa">Cuenta Visa</option>
+                <option value="ahorro">Cuenta Ahorro</option>
+            </select>
+        </div>
+
+        <!-- ********** CHECK BOX TERMINOS Y CONDICIONES ************** -->
+        <div class="mb-3 d-flex">
+            <div class="form-check">
+                <input class="form-check-input" formControlName="terms" [controlErrorsTpl]="mensajeError"
+                    type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Terminos y Condiciones
+                </label>
+            </div>
+        </div>
+
+        <!-- ********** BUTTON ************** -->
+        <div class="w-100">
+            <button class="btn-primary btn btn-block w-100" [disabled]="formPago.invalid"
+                style="background-color: lime;" type="submit">Pagar</button>
+        </div>
+
+
+        <!--- ********************* RAW CONTENT ***************** --->
+        <div class="w-100 pt-4">
+            <code class="w-100">
+                <b>Estado del formulario:</b> {{formPago.valid | json}}
+            </code>
+        </div>
+    </form>
+
+</div>
+
+
+<!---- ********************* ZONE TEMPLATES ****************** --->
+
+<ng-template let-error let-text="text" #messagePasswordError>
+    <!--  {{ error | json }} {{ text }}-->
+    <span class="control-error">Error:</span>
+    <div *ngIf="error?.minlength">
+        <i>No cumples con los caracteres minimos que son ({{error?.minlength?.requiredLength}}), ingresaste solo:
+            {{error?.minlength?.actualLength}}</i>
+    </div>
+</ng-template>
+
+
+<ng-template let-error let-text="text" #mensajeError> {{ error | json }} {{ text }} </ng-template>

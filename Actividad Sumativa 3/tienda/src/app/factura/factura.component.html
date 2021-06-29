@@ -1,0 +1,105 @@
+<div id="app" class="col-11">
+    <h2 align="center">Pago Realizado Exitosamente</h2>
+    <h2>Factura</h2>
+
+    <div class="row my-3">
+        <div class="col-10">
+            <h1>{{ total | currency:'CLP ' }}</h1>
+            <p>Av. Andrés Bello 2425, Providencia, Región Metropolitana</p>
+            <p>3er. nivel, local 312</p>
+        </div>
+        <div class="col-2">
+            <img src="../assets/BancoDeChile.png" width="250px" />
+        </div>
+    </div>
+
+    <div class="row fact-info mt-3">
+        <div class="col-3">
+            <h5>Facturar a</h5>
+            <p>
+                {{ pago.name | titlecase }}
+            </p>
+        </div>
+        <div class="col-3">
+            <h5>Enviar a</h5>
+            <p>
+                {{ envio.street }},
+                {{ envio.city }},
+                {{ envio.country }}
+            </p>
+        </div>
+        <div class="col-3">
+            <h5>N° de factura</h5>
+            <h5>Fecha</h5>
+            <h5>Fecha de vencimiento</h5>
+        </div>
+        <div class="col-3">
+            <h5>{{ factura }}</h5>
+            <p>{{ fecha | date:'dd/MM/yyyy' }}</p>
+            <p>{{ fecha2 | date:'dd/MM/yyyy' }}</p>
+        </div>
+    </div>
+    <br>
+
+    <div class="cond row">
+        <table class="table table-borderless factura" style="height:100px">
+            <thead>
+                <tr>
+                    <th><b>Cantidad</b></th>
+                    <th><b>Descripción</b></th>
+                    <th style="text-align: left;"><b>Precio Unitario</b></th>
+                    <th style="text-align: left;"><b>Importe</b></th>
+                </tr>
+            </thead>
+            <tbody class="table table-borderless factura">
+                <td>
+                    <tr *ngFor="let cant of cantidadesArray">
+                        <td>{{ cant }}</td>
+                    </tr>
+                </td>
+                <td>
+                    <tr *ngFor="let producto of productosArray">
+                        <td>{{ producto }}</td>
+                    </tr>
+                </td>
+                <td>
+                    <tr *ngFor="let precio of precioArray">
+                        <td>{{ precio }}</td>
+                    </tr>
+                </td>
+                <td>
+                    <tr *ngFor="let precio of precioArray">
+                        <td>{{ precio }}</td>
+                    </tr>
+                </td>
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th style="text-align: left;">Total Factura:</th>
+                    <th style="text-align: left;">{{ total | currency:'$ ' }}</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="cond row">
+        <div class="col-12 mt-3">
+            <h4>Condiciones y formas de pago</h4>
+
+            <p>El pago fue realizado de manera exitosa.</p>
+            <p>En caso de falla tiene un plazo de 90 días para hacer efectiva la garantía.</p>
+
+            <p>
+                <br />
+                Banco De Chile
+                <br />
+                IBAN: DO XX 0075 XXXX XX XX XXXX XXXX
+                <br />
+                Código SWIFT: BPDODOSXXXX
+            </p>
+        </div>
+    </div>
+</div>

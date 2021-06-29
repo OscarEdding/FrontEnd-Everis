@@ -1,0 +1,85 @@
+<div class="col-4 offset-4 p-4 animate__animated animate__fadeInDown">
+    <h2>Formulario De Envío Del Pedido</h2>
+    <br>
+
+    <form [formGroup]="formEnvio" (ngSubmit)="send()" class="pt-4 pb-4" errorTailor>
+        <!-- ********** INPUT PAIS ************** -->
+        <div class="mb-3">
+            <label for="country" class="form-label">País</label>
+            <input type="text" class="form-control shadow" id="country" formControlName="country">
+        </div>
+
+        <!-- ********** INPUT CALLE ************** -->
+        <div class="mb-3">
+            <label for="street" class="form-label">Calle</label>
+            <input type="text" class="form-control shadow" id="street" formControlName="street">
+        </div>
+
+        <!-- ********** INPUT CIUDAD ************** -->
+        <div class="mb-3">
+            <label for="city" class="form-label">Ciudad</label>
+            <input type="text" class="form-control shadow" id="city" formControlName="city">
+        </div>
+
+        <!-- ********** INPUT REGIÓN ************** -->
+        <div class="mb-3">
+            <label for="select" class="form-label">Región</label>
+            <select class="form-control shadow" formControlName="type" name="select" id="select">
+                <option value="arica">Arica y Parinacota</option>
+                <option value="tarapaca">Tarapacá</option>
+                <option value="antofagasta">Antofagasta</option>
+                <option value="atacama">Atacama</option>
+                <option value="coquimbo">Coquimbo</option>
+                <option value="valparaíso">Valparaíso</option>
+                <option value="rm">Metropolitana de Santiago</option>
+                <option value="libertador">Libertador General Bernardo O’Higgins</option>
+                <option value="maule">Maule</option>
+                <option value="ñuble">Ñuble</option>
+                <option value="biobio">Biobío</option>
+                <option value="araucania">La Araucanía</option>
+                <option value="rios">Los Ríos</option>
+                <option value="lagos">Los Lagos</option>
+                <option value="aysen">Aysén del General Carlos Ibáñez del Campo</option>
+                <option value="magallanes">Magallanes y la Antártica Chilena</option>
+            </select>
+        </div>
+
+        <!-- ********** INPUT CÓDIGO POSTAL ************** -->
+        <div class="mb-3">
+            <label for="postal" class="form-label">Código Postal</label>
+            <input type="text" class="form-control shadow" id="postal" formControlName="postal">
+        </div>
+
+
+
+        <!-- ********** BUTTON ************** -->
+        <div class="w-100">
+            <button class="btn-primary btn btn-block w-100" [disabled]="formEnvio.invalid" type="submit"
+                style="background-color: lime;">Pagar</button>
+        </div>
+
+
+        <!--- ********************* RAW CONTENT ***************** --->
+        <div class="w-100 pt-4">
+            <code class="w-100">
+                <b>Estado del formulario:</b> {{formEnvio.valid | json}}
+            </code>
+        </div>
+    </form>
+
+</div>
+
+
+<!---- ********************* ZONE TEMPLATES ****************** --->
+
+<ng-template let-error let-text="text" #messagePasswordError>
+    <!--  {{ error | json }} {{ text }}-->
+    <span class="control-error">Error:</span>
+    <div *ngIf="error?.minlength">
+        <i>No cumples con los caracteres minimos que son ({{error?.minlength?.requiredLength}}), ingresaste solo:
+            {{error?.minlength?.actualLength}}</i>
+    </div>
+</ng-template>
+
+
+<ng-template let-error let-text="text" #mensajeError> {{ error | json }} {{ text }} </ng-template>
